@@ -1,28 +1,28 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
-
-// Environment file used to host API keys
-require('dotenv');
-require('dotenv').config();
+const { MongoClient, ServerApiVersion } = require("mongodb");
 
 // Setting up connection config for MongoDB
 const uri = process.env.MONGO_URL;
 const mongoClient = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverApi: ServerApiVersion.v1,
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	serverApi: ServerApiVersion.v1,
 });
 
 const getCollection = async () => {
-  try {
-    await mongoClient.connect();
-    // TODO: add to .env
-    const database = mongoClient.db('mv3');
-    return database.collection('mv3-sales');
-  } catch (e) {
-    console.error(e);
-    return 'An error occurred.';
-  }
+	try {
+		await mongoClient.connect();
+		const database = mongoClient.db(process.env.DB_NAME);
+		mongoClient.collection = database.collection(
+			process.env.COLLECTION_NAME,
+		);
+	} catch (e) {
+		console.error(e);
+	} finally {
+		await mongoClient.close(); //ensure the connection is closed
+	}
 };
+
+getCollection();
 
 const checkDataDuplicate = async (from, to, timestamp, txHash) => {
   try {
