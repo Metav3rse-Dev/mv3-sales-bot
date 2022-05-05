@@ -2,9 +2,9 @@
 
 ## About
 
-- An opensource bot that fetches NFT sales directly from the Ethereum ledger and broadcasts the information onto Twitter and Discord
-- <b> Developed by TroyD41#7095, cole#9349, RT#3588, ghostrunner.eth#0001 </b>
-- The bot is built using `Node.js` and `Web3.js`
+-   An opensource bot that fetches NFT sales directly from the Ethereum ledger and broadcasts the information onto Twitter and Discord
+-   <b> Developed by TroyD41#7095, cole#9349, RT#3588, ghostrunner.eth#0001 </b>
+-   The bot is built using `Node.js` and `Web3.js`
 
 ## How does the bot work? An overview!
 
@@ -28,21 +28,24 @@ Once the bot detects that a sale has been made, we capture multiple datapoints f
     "tokenId":"413"
 }
 ```
+
 We then use the above record to store the transcation data in MongoDB, to create a new tweet and to send a message on a Discord channel.
 
 <i>Fun Fact: The bot is capable of detecting both ETH and WETH transfers for value! </i>
 
 ## Structure of the repo
 
-- `server.js` is the main executable file.
-- `utils` folders holds all the smaller utilities such as processing metadata for image retrieval, price converter from ETH to USD, contract ABI etc.
-- `handlers` folder holds all the required code to interact with MongoDB, Discord and Twitter using their libraries and SDKs.
+-   `server.js` is the main executable file.
+-   `utils` folders holds all the smaller utilities such as processing metadata for image retrieval, price converter from ETH to USD, contract ABI etc.
+-   `handlers` folder holds all the required code to interact with MongoDB, Discord and Twitter using their libraries and SDKs.
 
 ## Using the bot for your own project
 
 You would need to have node and npm installed (preferrable v16 or above).
+
 1. Run `npm install`
 2. Create a `.env` file in the root folder with the following variables and put in your credentials.
+
 ```
 MONGO_URL = "key goes here"
 WEB3_PROVIDER = "key goes here"
@@ -57,6 +60,7 @@ DISCORD_BOT_TOKEN = 'key goes here'
 DISCORD_CHANNEL_ID= 'key goes here'
 CONTRACT_ADDRESS = "key goes here"
 ```
+
 View the next section for more info on this!
 
 3. Run `npm start`
